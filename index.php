@@ -23,9 +23,9 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 <ul>
 <?php
 $serverName = $_SERVER["SERVER_NAME"];
-echo "\t<li><strong>Server Name:</strong> ".$serverName.'</li>';
-// echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info .'</li>';
-echo "\t<li><strong>HTTP_USER_AGENT:</strong> ".$_SERVER['HTTP_USER_AGENT'].'</li>';
+echo "\t<li><strong>Server Name:</strong> ".$serverName."</li>\n";
+// echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info ."</li>\n";
+echo "\t<li><strong>HTTP_USER_AGENT:</strong> ".$_SERVER['HTTP_USER_AGENT']."</li>\n";
 ?>
 </ul>
 <?php
@@ -56,7 +56,11 @@ try {
 catch(PDOException $e) {
     echo "<p>PDO ERROR: ".$e->getMessage()."</p>";
 }
-echo "<p><strong>Output as table:</strong></p>";
+?>
+
+<p><strong>Output as table:</strong></p>
+
+<?php
 echo "<table>\n";
 echo "\t<tr>\n";
 echo "\t\t<td><strong>name</strong></td>\n";
@@ -70,14 +74,18 @@ foreach($db->query('SELECT * FROM example') as $row) {
 echo "</table>\n";
 
 
+?>
 
-echo "<p><strong>Output as JSON:</strong></p>";
+<p><strong>Output as JSON:</strong></p>
+
+<?php
 
 $sql = "SELECT count(*) FROM `example`"; 
 $result = $db->prepare($sql); 
 $result->execute(); 
 $number_of_rows = $result->fetchColumn(); 
 
+echo "<code>\n";
 echo "[";
 $i = 0;
 foreach($db->query('SELECT * FROM example') as $row) {
@@ -89,6 +97,7 @@ foreach($db->query('SELECT * FROM example') as $row) {
     }
 }
 echo "]";
+echo "\n</code>";
 
 /* creates a table
 $mysqli->query("CREATE TABLE example(
