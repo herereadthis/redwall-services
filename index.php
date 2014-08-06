@@ -64,7 +64,12 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     echo "</ul>\n";
 
 
+?>
+<ul>
+    <li>Return example table as JSON: <a href="/?table=example">/?table=example</a></li>
+</ul>
 
+<?php
 
 
     echo "<p><strong>Output as table:</strong></p>\n";
