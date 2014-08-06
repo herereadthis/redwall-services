@@ -99,7 +99,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     foreach($db->query('SELECT * FROM example') as $row) {
         $i++;
         echo "{\"id\":\"".$row['id']."\",";
-        echo "{\"name\":\"".$row['name']."\",";
+        echo "\"name\":\"".$row['name']."\",";
         echo "\"age\":\"".$row['age']."\"}";
         if ($number_of_rows > $i) {
             echo ",";
@@ -115,12 +115,18 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 <?php
 }
 else if ($query_table === "example") {
+
+    $sql = "SELECT count(*) FROM `example`"; 
+    $result = $db->prepare($sql); 
+    $result->execute(); 
+    $number_of_rows = $result->fetchColumn(); 
+
     echo "[";
     $i = 0;
     foreach($db->query('SELECT * FROM example') as $row) {
         $i++;
         echo "{\"id\":\"".$row['id']."\",";
-        echo "{\"name\":\"".$row['name']."\",";
+        echo "\"name\":\"".$row['name']."\",";
         echo "\"age\":\"".$row['age']."\"}";
         if ($number_of_rows > $i) {
             echo ",";
