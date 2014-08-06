@@ -17,13 +17,22 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 
 <?php
 
+
+
+?>
+<ul>
+<?php
+$serverName = $_SERVER["SERVER_NAME"];
+echo "\t<li><strong>Server Name:</strong> ".$serverName.'</li>';
+// echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info .'</li>';
+echo "\t<li><strong>HTTP_USER_AGENT:</strong> ".$_SERVER['HTTP_USER_AGENT'].'</li>';
+?>
+</ul>
+<?php
+
+
 // see access_keys.txt for sample
 require("dbaccess.php");
-
-
-$foo = $foo;
-
-echo $foo;
 
 $db_internal = $db_internal;
 $db_external = $db_external;
@@ -31,39 +40,71 @@ $db_database = $db_database;
 $db_username = $db_username;
 $db_password = $db_password;
 
-// $db_internal = "localhost:3306";
-// $db_internal = "localhost";
-
-$serverName = $_SERVER["SERVER_NAME"];
-
-
 if ($serverName === "localhost") {
-	$db_hostname = $db_external;
+    $db_hostname = $db_external;
 }
 else {
-	$db_hostname = $db_internal;
+    $db_hostname = $db_internal;
 }
-echo $db_hostname.'!';
 
 
-// $c = mysqli_connect($db_internal, $db_username, $db_password, $db_database);
-$mysqli = new mysqli($db_internal, $db_username, $db_password, $db_database);
 
-
-if ($mysqli->connect_errno) {
-    echo "<p>Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error."</p>";
+try {
+  # MySQL with PDO_MYSQL
+  $db = new PDO("mysql:host=$db_hostname;dbname=$db_database;charset=utf8", $db_username, $db_password);
 }
-echo '<p>'.$mysqli->host_info .'</p>';
-// $result = mysql_query("SELECT 'Hello, dear MySQL user!' AS _message FROM DUAL");
-// $row = mysql_fetch_assoc($result);
-// echo htmlentities($row['_message']);
+catch(PDOException $e) {
+    echo "<p>PDO ERROR: ".$e->getMessage()."</p>";
+}
+echo "<p><strong>Output as table:</strong></p>";
+echo "<table>\n";
+echo "\t<tr>\n";
+echo "\t\t<td><strong>name</strong></td>\n";
+echo "\t\t<td><strong>age</strong></td>\n";
+echo "\t</tr>\n";
+foreach($db->query('SELECT * FROM example') as $row) {
+    echo "\t<tr>\n";
+    echo "\t\t<td>".$row['name']."</td>\n\t\t<td>".$row['age']."</td>";
+    echo "\t<tr>\n";
+}
+echo "</table>\n";
 
 
-$helloWorld = 'Hello World!';
-echo '<p>'.$helloWorld .'</p>';
-echo '<p>'.$_SERVER['HTTP_USER_AGENT'].'</p>';
+
+echo "<p><strong>Output as JSON:</strong></p>";
+
+$sql = "SELECT count(*) FROM `example`"; 
+$result = $db->prepare($sql); 
+$result->execute(); 
+$number_of_rows = $result->fetchColumn(); 
+
+echo "[";
+$i = 0;
+foreach($db->query('SELECT * FROM example') as $row) {
+    $i++;
+    echo "{\"name\":\"".$row['name']."\",";
+    echo "\"age\":\"".$row['age']."\"}";
+    if ($number_of_rows > $i) {
+        echo ",";
+    }
+}
+echo "]";
+
+/* creates a table
+$mysqli->query("CREATE TABLE example(
+    id INT NOT NULL AUTO_INCREMENT, 
+    PRIMARY KEY(id),
+    name VARCHAR(30), 
+    age INT)");  
+echo "Table Created!";
+*/
 
 
+
+
+
+
+/*
 $array = array(
     "foo" => "bar",
     "sum" => "ting",
@@ -83,6 +124,7 @@ echo "<p>".$varDump."</p>";
 unset($array[2]);
 $varDump = print_r($array);
 echo "<p>".$varDump."</p>";
+*/
 
 ?>
 
