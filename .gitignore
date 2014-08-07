@@ -1,2 +1,4 @@
 .DS_Store
 dbaccess.php
+/node_modules/
+/src/components/

@@ -49,7 +49,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     <title property="dc:title">Redwall PHP</title>
     <meta name="robots" content="INDEX, FOLLOW" />
 </head>
-<body data-module="retromator" data-google-analytics="UA-37798496-1">
+<body data-google-analytics="UA-37798496-1">
 
 <h1>Redwall PHP Services</h1>
 
@@ -114,7 +114,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     echo "\n</code>";
 
 ?>
-
+<script data-main="/build/js/main" src="/build/js/require.js"></script>
 </body>
 </html>
 <?php
