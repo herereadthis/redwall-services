@@ -1,13 +1,13 @@
 (function() {
 
-  define(['jquery'], function($) {
+  define(['jquery', "ExampleJSON"], function($, ExampleJSON) {
     var exports, gVars, makeItHappen, moduleName;
     exports = {};
     gVars = {};
     moduleName = "demo";
 
     makeItHappen = function($this) {
-        console.log('foo');
+        ExampleJSON.init();
     };
     exports.init = function($this) {
         var $element;

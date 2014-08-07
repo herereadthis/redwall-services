@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         paths: {
             src: './src',
             build: './build',
-            components: './src/components'
+            components: './bower_components'
         },
         requirejs: {
             build: {

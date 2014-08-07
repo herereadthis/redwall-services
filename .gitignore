@@ -1,4 +1,6 @@
 .DS_Store
+.htaccess
 dbaccess.php
 /node_modules/
 /src/components/
+/bower_components/
