@@ -1,9 +1,33 @@
 <?php
-
-
 // see access_keys.txt for sample
 require("dbaccess.php");
+?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en"
+prefix="og: http://ogp.me/ns#
+fb: http://ogp.me/ns/fb#
+foaf: http://xmlns.com/foaf/0.1/
+dc: http://purl.org/dc/terms/
+v: http://rdf.data-vocabulary.org/#
+owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
+<head>
+    <meta charset="utf-8">
+    <title property="dc:title">Redwall PHP</title>
+    <meta name="robots" content="INDEX, FOLLOW" />
+</head>
+<body data-module="demo" data-google-analytics="UA-37798496-2">
 
+<h1>Redwall PHP Services</h1>
+
+<ul>
+    <li><strong>Server Name:</strong> <?php echo $_SERVER["SERVER_NAME"]; ?></li>
+    <li><strong>HTTP_USER_AGENT:</strong> <?php echo $_SERVER['HTTP_USER_AGENT']; ?></li>
+    <li><strong>Return example table as JSON:</strong> <a href="/api/?table=example">/api/?table=example</a></li>
+</ul>
+
+<?php
+
+// echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info ."</li>\n";
 
 $db_internal = $db_internal;
 $db_external = $db_external;
@@ -35,39 +59,11 @@ $query_table = $_GET["table"];
 
 if (!$query_table) {
 
-?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr" xml:lang="en"
-prefix="og: http://ogp.me/ns#
-fb: http://ogp.me/ns/fb#
-foaf: http://xmlns.com/foaf/0.1/
-dc: http://purl.org/dc/terms/
-v: http://rdf.data-vocabulary.org/#
-owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
-<head>
-    <meta charset="utf-8">
-    <title property="dc:title">Redwall PHP</title>
-    <meta name="robots" content="INDEX, FOLLOW" />
-</head>
-<body data-google-analytics="UA-37798496-1">
 
-<h1>Redwall PHP Services</h1>
-
-<?php
-
-
-    echo "<ul>\n";
-    $serverName = $_SERVER["SERVER_NAME"];
-    echo "\t<li><strong>Server Name:</strong> ".$serverName."</li>\n";
-    // echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info ."</li>\n";
-    echo "\t<li><strong>HTTP_USER_AGENT:</strong> ".$_SERVER['HTTP_USER_AGENT']."</li>\n";
-    echo "</ul>\n";
 
 
 ?>
-<ul>
-    <li>Return example table as JSON: <a href="/?table=example">/?table=example</a></li>
-</ul>
+
 
 <?php
 
@@ -113,32 +109,9 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     echo "]";
     echo "\n</code>";
 
-?>
-<script data-main="/build/js/main" src="/build/js/require.js"></script>
-</body>
-</html>
-<?php
 }
-else if ($query_table === "example") {
 
-    $sql = "SELECT count(*) FROM `example`"; 
-    $result = $db->prepare($sql); 
-    $result->execute(); 
-    $number_of_rows = $result->fetchColumn(); 
 
-    echo "[";
-    $i = 0;
-    foreach($db->query('SELECT * FROM example') as $row) {
-        $i++;
-        echo "{\"id\":\"".$row['id']."\",";
-        echo "\"name\":\"".$row['name']."\",";
-        echo "\"age\":\"".$row['age']."\"}";
-        if ($number_of_rows > $i) {
-            echo ",";
-        }
-    }
-    echo "]";
-}
 
 /* creates a table
 $mysqli->query("CREATE TABLE example(
@@ -176,5 +149,10 @@ $varDump = print_r($array);
 echo "<p>".$varDump."</p>";
 */
 
+
+
 ?>
+<script data-main="/build/js/main" src="/build/js/require.js"></script>
+</body>
+</html>
 
