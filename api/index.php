@@ -1,9 +1,9 @@
 <?php
-
+header('Content-Type: application/json');
 
 // see access_keys.txt for sample
 require("../dbaccess.php");
-include("../includes/get_hostname.php");
+require("../includes/get_hostname.php");
 
 try {
   # MySQL with PDO_MYSQL
@@ -28,9 +28,9 @@ if ($query_table === "example") {
     $i = 0;
     foreach($db->query('SELECT * FROM example') as $row) {
         $i++;
-        echo "{\"id\":\"".$row['id']."\",";
+        echo "{\"id\":".$row['id'].",";
         echo "\"name\":\"".$row['name']."\",";
-        echo "\"age\":\"".$row['age']."\"}";
+        echo "\"age\":".$row['age']."}";
         if ($number_of_rows > $i) {
             echo ",";
         }

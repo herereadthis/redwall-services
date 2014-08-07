@@ -89,9 +89,9 @@ if (!$query_table) {
     $i = 0;
     foreach($db->query('SELECT * FROM example') as $row) {
         $i++;
-        echo "{\"id\":\"".$row['id']."\",";
+        echo "{\"id\":".$row['id'].",";
         echo "\"name\":\"".$row['name']."\",";
-        echo "\"age\":\"".$row['age']."\"}";
+        echo "\"age\":".$row['age']."}";
         if ($number_of_rows > $i) {
             echo ",";
         }
