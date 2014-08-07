@@ -3,22 +3,7 @@
 
 // see access_keys.txt for sample
 require("../dbaccess.php");
-
-
-$db_internal = $db_internal;
-$db_external = $db_external;
-$db_database = $db_database;
-$db_username = $db_username;
-$db_password = $db_password;
-
-if ($serverName === "localhost") {
-    $db_hostname = $db_external;
-}
-else {
-    $db_hostname = $db_internal;
-}
-
-
+include("../includes/get_hostname.php");
 
 try {
   # MySQL with PDO_MYSQL

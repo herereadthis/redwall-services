@@ -1,6 +1,7 @@
 <?php
 // see access_keys.txt for sample
 require("dbaccess.php");
+require("includes/get_hostname.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xml:lang="en"
@@ -17,7 +18,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 </head>
 <body data-google-analytics="UA-37798496-2">
 
-<h1>Redwall PHP Services</h1>
+<h1><a href="/">Redwall PHP Services</a></h1>
 
 <ul>
     <li><strong>Server Name:</strong> <?php echo $_SERVER["SERVER_NAME"]; ?></li>
@@ -30,18 +31,6 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 
 // echo "\t<li><strong>host_info:</strong> ".$mysqli->host_info ."</li>\n";
 
-$db_internal = $db_internal;
-$db_external = $db_external;
-$db_database = $db_database;
-$db_username = $db_username;
-$db_password = $db_password;
-
-if ($serverName === "localhost") {
-    $db_hostname = $db_external;
-}
-else {
-    $db_hostname = $db_internal;
-}
 
 
 
