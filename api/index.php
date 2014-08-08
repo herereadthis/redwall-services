@@ -1,42 +1,30 @@
-<?php
-header('Content-Type: application/json');
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en"
+prefix="og: http://ogp.me/ns#
+fb: http://ogp.me/ns/fb#
+foaf: http://xmlns.com/foaf/0.1/
+dc: http://purl.org/dc/terms/
+v: http://rdf.data-vocabulary.org/#
+owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
+<head>
+    <meta charset="utf-8">
+    <title property="dc:title">Redwall PHP</title>
+    <meta name="robots" content="INDEX, FOLLOW" />
+</head>
+<body data-module="demo" data-google-analytics="UA-37798496-2">
 
-// see access_keys.txt for sample
-require("../dbaccess.php");
-require("../includes/get_hostname.php");
+<h1><a href="/">Redwall PHP Services</a></h1>
 
-try {
-  # MySQL with PDO_MYSQL
-  $db = new PDO("mysql:host=$db_hostname;dbname=$db_database;charset=utf8", $db_username, $db_password);
-}
-catch(PDOException $e) {
-    echo "<p>PDO ERROR: ".$e->getMessage()."</p>";
-}
+<ul>
+    <li><strong>Example JSON</strong> <a href="/api/example/">/api/example/</a></li>
+    <li><strong>Page Stats JSON:</strong> <a href="/api/page_stats/">/api/page_stats/</a></li>
+</ul>
+
+
+<script data-main="/build/js/main" src="/build/js/require.js"></script>
 
 
 
-$query_table = $_GET["table"];
-
-if ($query_table === "example") {
-
-    $sql = "SELECT count(*) FROM `example`"; 
-    $result = $db->prepare($sql); 
-    $result->execute(); 
-    $number_of_rows = $result->fetchColumn(); 
-
-    echo "[";
-    $i = 0;
-    foreach($db->query('SELECT * FROM example') as $row) {
-        $i++;
-        echo "{\"id\":".$row['id'].",";
-        echo "\"name\":\"".$row['name']."\",";
-        echo "\"age\":".$row['age']."}";
-        if ($number_of_rows > $i) {
-            echo ",";
-        }
-    }
-    echo "]";
-}
-
-?>
+</body>
+</html>
 

@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 
 // see access_keys.txt for sample
 require("../../dbaccess.php");
@@ -21,7 +22,7 @@ if (isset($query_table)) {
     if (!empty($query_table)) {
         $http_user_agent = explode("http://herereadthis.com",$query_table);
 
-        echo "<p>&iexcl;".$http_user_agent[1]."!</p>";
+        // echo "<p>HTTP user agent: ".$http_user_agent[1]."</p>";
 
         $statement=$db->prepare("SELECT * FROM `page_stats` WHERE `url_path` = :url_path");
         $statement->execute(array('url_path' => $http_user_agent[1]));
@@ -38,7 +39,7 @@ if (isset($query_table)) {
                 WHERE  `url_path` = :url_path");
             $up_page_hits->execute(array('page_hits' => $page_hits,
                 'url_path' => $http_user_agent[1]));
-            echo $page_hits;
+            // echo $page_hits;
         }
         // entry does not exist.
         // add into table.
@@ -48,7 +49,24 @@ if (isset($query_table)) {
                 SET `url_path` = :url_path, `page_hits` = 1');
             $new_url->execute(array('url_path' => $http_user_agent[1]));
         }
+        // spit back JSON...
+        // prepare PDO
+        $get_url_row=$db->prepare("SELECT * FROM `page_stats` WHERE `url_path` = :url_path");
+        // execute with url path
+        $get_url_row->execute(array('url_path' => $http_user_agent[1]));
+        // fetch results as array
+        $json_results=$get_url_row->fetchAll(PDO::FETCH_ASSOC);
+        // get object from array and return as JSON
+        $json=json_encode($json_results[0]);
+        echo $json;
     }
+}
+else {
+    $get_table = $db->prepare("SELECT * FROM `page_stats`");
+    $get_table->execute();
+    $json_results=$get_table->fetchAll(PDO::FETCH_ASSOC);
+    $json=json_encode($json_results);
+    echo $json;
 }
 
 // if ($query_table === "example") {

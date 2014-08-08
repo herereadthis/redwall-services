@@ -18,14 +18,11 @@ catch(PDOException $e) {
 // $query_table = $_GET["table"];
 
 
-$sql = "SELECT * FROM `example`"; 
-$statement = $db->prepare($sql); 
-$statement->execute(); 
-$number_of_rows = $statement->fetchColumn(); 
-
-$results=$statement->fetchAll(PDO::FETCH_ASSOC);
-$json=json_encode($results);
-print_r($json);
+$get_table = $db->prepare("SELECT * FROM `example`");
+$get_table->execute();
+$json_results=$get_table->fetchAll(PDO::FETCH_ASSOC);
+$json=json_encode($json_results);
+echo $json;
 
 // echo "[";
 // $i = 0;

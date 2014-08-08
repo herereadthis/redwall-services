@@ -26,6 +26,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     <li><strong>HTTP_USER_AGENT:</strong> <?php echo $_SERVER['HTTP_USER_AGENT']; ?></li>
     <li><strong>View Demo Page:</strong> <a href="/demo/">/demo/</a></li>
     <li><strong>Return example table as JSON:</strong> <a href="/api/example/">/api/example/</a></li>
+    <li><strong>Return page_stats table as JSON:</strong> <a href="/api/page_stats/">/api/page_stats/</a></li>
 </ul>
 
 <?php
