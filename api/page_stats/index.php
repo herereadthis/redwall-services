@@ -13,6 +13,17 @@ catch(PDOException $e) {
     echo "<p>PDO ERROR: ".$e->getMessage()."</p>";
 }
 
+// Table Creation
+$sql ="CREATE TABLE IF NOT EXISTS `qwerty`(
+    `page_id`       int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `url_path`      varchar(63) NOT NULL,
+    `page_hits`     int(11) NOT NULL,
+    UNIQUE (`url_path`)
+    ) ENGINE=INNODB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
+$create_table = $db->prepare($sql);
+$create_table->execute();
+
+
 
 $query_table = $_GET["url"];
 // if a url is part of the query
@@ -69,26 +80,4 @@ else {
     echo $json;
 }
 
-// if ($query_table === "example") {
-
-//     $sql = "SELECT count(*) FROM `example`"; 
-//     $result = $db->prepare($sql); 
-//     $result->execute(); 
-//     $number_of_rows = $result->fetchColumn(); 
-
-//     echo "[";
-//     $i = 0;
-//     foreach($db->query('SELECT * FROM example') as $row) {
-//         $i++;
-//         echo "{\"id\":".$row['id'].",";
-//         echo "\"name\":\"".$row['name']."\",";
-//         echo "\"age\":".$row['age']."}";
-//         if ($number_of_rows > $i) {
-//             echo ",";
-//         }
-//     }
-//     echo "]";
-// }
-
 ?>
-
