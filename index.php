@@ -21,10 +21,11 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 <h1><a href="/">Redwall PHP Services</a></h1>
 
 <ul>
+    <li><strong>URL:</strong> <?php echo $_SERVER["SCRIPT_URI"]; ?></li>
     <li><strong>Server Name:</strong> <?php echo $_SERVER["SERVER_NAME"]; ?></li>
     <li><strong>HTTP_USER_AGENT:</strong> <?php echo $_SERVER['HTTP_USER_AGENT']; ?></li>
     <li><strong>View Demo Page:</strong> <a href="/demo/">/demo/</a></li>
-    <li><strong>Return example table as JSON:</strong> <a href="/api/?table=example">/api/?table=example</a></li>
+    <li><strong>Return example table as JSON:</strong> <a href="/api/example/">/api/example/</a></li>
 </ul>
 
 <?php
@@ -57,47 +58,45 @@ if (!$query_table) {
 
 <?php
 
+$nRows = $db->query('select count(*) from example')->fetchColumn();
 
-    echo "<p><strong>Output as table:</strong></p>\n";
-    echo "<table>\n";
+echo "<p><strong>Output as table (" . $nRows . " rows):</strong></p>\n";
+echo "<table>\n";
+echo "\t<tr>\n";
+echo "\t\t<td><strong>id</strong></td>\n";
+echo "\t\t<td><strong>name</strong></td>\n";
+echo "\t\t<td><strong>age</strong></td>\n";
+echo "\t</tr>\n";
+foreach($db->query('SELECT * FROM example') as $row) {
     echo "\t<tr>\n";
-    echo "\t\t<td><strong>id</strong></td>\n";
-    echo "\t\t<td><strong>name</strong></td>\n";
-    echo "\t\t<td><strong>age</strong></td>\n";
-    echo "\t</tr>\n";
-    foreach($db->query('SELECT * FROM example') as $row) {
-        echo "\t<tr>\n";
-        echo "\t\t<td>".$row['id']."</td>\n";
-        echo "\t\t<td>".$row['name']."</td>\n";
-        echo "\t\t<td>".$row['age']."</td>\n";
-        echo "\t<tr>\n";
+    echo "\t\t<td>".$row['id']."</td>\n";
+    echo "\t\t<td>".$row['name']."</td>\n";
+    echo "\t\t<td>".$row['age']."</td>\n";
+    echo "\t<tr>\n";
+}
+echo "</table>\n";
+
+
+$sql = "SELECT count(*) FROM `example`"; 
+$result = $db->prepare($sql); 
+$result->execute(); 
+$number_of_rows = $result->fetchColumn(); 
+
+echo "<p><strong>Output as JSON:</strong></p>\n";
+echo "<code>\n";
+echo "[";
+$i = 0;
+foreach($db->query('SELECT * FROM example') as $row) {
+    $i++;
+    echo "{\"id\":".$row['id'].",";
+    echo "\"name\":\"".$row['name']."\",";
+    echo "\"age\":".$row['age']."}";
+    if ($number_of_rows > $i) {
+        echo ",";
     }
-    echo "</table>\n";
-
-
-
-
-
-    $sql = "SELECT count(*) FROM `example`"; 
-    $result = $db->prepare($sql); 
-    $result->execute(); 
-    $number_of_rows = $result->fetchColumn(); 
-
-    echo "<p><strong>Output as JSON:</strong></p>\n";
-    echo "<code>\n";
-    echo "[";
-    $i = 0;
-    foreach($db->query('SELECT * FROM example') as $row) {
-        $i++;
-        echo "{\"id\":".$row['id'].",";
-        echo "\"name\":\"".$row['name']."\",";
-        echo "\"age\":".$row['age']."}";
-        if ($number_of_rows > $i) {
-            echo ",";
-        }
-    }
-    echo "]";
-    echo "\n</code>";
+}
+echo "]";
+echo "\n</code>";
 
 }
 

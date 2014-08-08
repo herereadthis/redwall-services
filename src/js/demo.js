@@ -8,6 +8,13 @@
 
     makeItHappen = function($this) {
         ExampleJSON.init();
+
+        var request_uri = location.pathname + location.search;
+        var document_url = document.URL;
+        request_uri = encodeURIComponent(request_uri);
+        document_url = encodeURIComponent(document_url);
+        $('[data-js-variable="document_url"]').html(document_url);
+        $('[data-js-variable="request_uri"]').html(request_uri);
     };
     exports.init = function($this) {
         var $element;

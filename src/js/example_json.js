@@ -8,7 +8,7 @@
         exampleAjax = function($this) {
             console.log($this.html());
             var jsonFile;
-            jsonFile = "http://redwall.herereadthis.com/api/?table=example";
+            jsonFile = "http://redwall.herereadthis.com/api/example/";
 
             $.getJSON(jsonFile, function(data) {
                 var fubar = data;
