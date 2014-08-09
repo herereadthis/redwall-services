@@ -75,7 +75,7 @@ if (isset($query_table)) {
             $new_url = $db->prepare('INSERT IGNORE INTO `page_stats` 
                 SET `url_path` = :url_path, 
                     `title` = :title,
-                    `page_hits` = 1');
+                    `page_hits` = 0');
             $new_url->execute(array(
                 'title' => $query_title,
                 'url_path' => $http_user_agent[1])
