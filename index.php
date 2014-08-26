@@ -27,6 +27,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
     <li><strong>View Demo Page:</strong> <a href="/demo/">/demo/</a></li>
     <li><strong>Return example table as JSON:</strong> <a href="/api/example/">/api/example/</a></li>
     <li><strong>Return page_stats table as JSON:</strong> <a href="/api/page_stats/">/api/page_stats/</a></li>
+    <li><strong>Return banner_image table as JSON:</strong> <a href="/api/banner_image/">/api/banner_image/</a></li>
 </ul>
 
 <?php

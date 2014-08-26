@@ -18,6 +18,7 @@ owl: http://www.w3.org/2002/07/owl#" class="no-js no-touch">
 <ul>
     <li><strong>Example JSON</strong> <a href="/api/example/">/api/example/</a></li>
     <li><strong>Page Stats JSON:</strong> <a href="/api/page_stats/">/api/page_stats/</a></li>
+    <li><strong>Banner Image JSON:</strong> <a href="/api/banner_image/">/api/banner_image/</a></li>
 </ul>
 
 
