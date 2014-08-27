@@ -18,6 +18,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `banner_image` (
     `pk`            int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `unique_id`     char(30) NOT NULL UNIQUE,
     `url`           varchar(127) NOT NULL UNIQUE,
+    `thumbnail`     VARCHAR( 127 ) NOT NULL UNIQUE,
     `width`         smallint(6) NOT NULL,
     `height`        smallint(6) NOT NULL,
     `title`         char(63) NOT NULL,
