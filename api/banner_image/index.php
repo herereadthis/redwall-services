@@ -22,7 +22,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `banner_image` (
     `width`         smallint(6) NOT NULL,
     `height`        smallint(6) NOT NULL,
     `title`         char(63) NOT NULL,
-    `description`   varchar(255) NOT NULL,
+    `description`   text NOT NULL,
     `hits`          int(11) NOT NULL DEFAULT '0'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
 $create_table = $db->prepare($sql);
